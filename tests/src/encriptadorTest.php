@@ -21,6 +21,32 @@ class encriptadorTest extends test {
         $this->paths_conf->database = '/var/www/html/administrador/config/database.php';
         $this->paths_conf->views = '/var/www/html/administrador/config/views.php';
     }
+
+    public function test_asigna_valores_base(): void
+    {
+
+
+        errores::$error = false;
+        $en = new encriptador();
+        $en = new liberator($en);
+        $init = new stdClass();
+        $resultado = $en->asigna_valores_base($init);
+        $this->assertTrue(errores::$error);
+        $this->assertIsArray( $resultado);
+        $this->assertStringContainsStringIgnoringCase( 'Error al validar init',$resultado['mensaje']);
+
+        errores::$error = false;
+
+        $init = new stdClass();
+        $init->clave = 'xxx xx xx';
+        $init->metodo_encriptacion = 'aes-256-cbc';
+        $init->iv = 'WtYTL1/M8jfstw==';
+        $resultado = $en->asigna_valores_base($init);
+        $this->assertNotTrue(errores::$error);
+        $this->assertIsObject( $resultado);
+
+        errores::$error = false;
+    }
     public function test_desencripta(): void
     {
 
@@ -35,6 +61,8 @@ class encriptadorTest extends test {
             exit;
         }
         $resultado = $en->desencripta($encriptado);
+
+
         $this->assertNotTrue(errores::$error);
         $this->assertIsString( $resultado);
         $this->assertEquals( '',$resultado);
@@ -55,6 +83,54 @@ class encriptadorTest extends test {
 
 
 
+    }
+
+    public function test_encripta(): void
+    {
+
+
+        errores::$error = false;
+        $en = new encriptador();
+        $valor = '';
+        $resultado = $en->encripta($valor);
+        $this->assertNotTrue(errores::$error);
+        $this->assertIsString( $resultado);
+
+        errores::$error = false;
+
+        $valor = 'prueba';
+        $resultado = $en->encripta($valor);
+        $this->assertNotTrue(errores::$error);
+        $this->assertEquals('afnn4IH/j6/t9Kiz0OkOBw==', $resultado);
+
+        errores::$error = false;
+
+    }
+
+    public function test_inicializa_datos(): void
+    {
+        errores::$error = false;
+        $en = new encriptador();
+        $en = new liberator($en);
+        $clave = '';
+        $iv = '';
+        $metodo_encriptacion = '';
+        $resultado = $en->inicializa_datos($clave, $iv, $metodo_encriptacion);
+        $this->assertNotTrue(errores::$error);
+        $this->assertEquals('WtYTL1/M8jfstw==', $resultado->iv);
+        $this->assertEquals('aes-256-cbc', $resultado->metodo_encriptacion);
+
+        errores::$error = false;
+
+        $clave = 'zzz';
+        $iv = '';
+        $metodo_encriptacion = '';
+        $resultado = $en->inicializa_datos($clave, $iv, $metodo_encriptacion);
+        $this->assertNotTrue(errores::$error);
+        $this->assertEquals('WtYTL1/M8jfstw==', $resultado->iv);
+        $this->assertEquals('aes-256-cbc', $resultado->metodo_encriptacion);
+        $this->assertEquals('zzz', $resultado->clave);
+        errores::$error = false;
     }
 
     public function test_inicializa_valores(): void
@@ -89,8 +165,6 @@ class encriptadorTest extends test {
 
     public function test_verifica_datos(): void
     {
-
-
         errores::$error = false;
         $en = new encriptador();
         $en = new liberator($en);
@@ -110,26 +184,17 @@ class encriptadorTest extends test {
     }
 
 
-    public function test_encripta(): void
+    public function test_vacio_encriptado(): void
     {
-
 
         errores::$error = false;
         $en = new encriptador();
-        $valor = '';
-        $resultado = $en->encripta($valor);
+        $en = new liberator($en);
+        $encriptado = $en->vacio_encriptado();
         $this->assertNotTrue(errores::$error);
-        $this->assertIsString( $resultado);
-
+        $this->assertIsString( $encriptado);
+        $this->assertEquals('gcEvKISRAHzCsYVrd0oELA==', $encriptado);
         errores::$error = false;
-
-        $valor = 'prueba';
-        $resultado = $en->encripta($valor);
-        $this->assertNotTrue(errores::$error);
-        $this->assertEquals('afnn4IH/j6/t9Kiz0OkOBw==', $resultado);
-
-        errores::$error = false;
-
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Martin Gamboa Vazquez
- * @version 1.1.0
+ * @version 1.2.0
  * Encripta y desencripta valores entregados
  */
 namespace gamboamartin\encripta;
@@ -19,16 +19,34 @@ class encriptador{
     private string $metodo_encriptacion;
     private string $iv;
     private errores $error;
+    private string $vacio_encriptado;
 
     public function __construct(string $clave = '', string $iv = '', string $metodo_encriptacion = ''){
         $this->error = new errores();
 
-        $init = $this->inicializa_valores(clave: $clave,metodo_encriptacion: $metodo_encriptacion,iv: $iv);
+        $base = $this->inicializa_datos(clave: $clave,iv:  $iv, metodo_encriptacion: $metodo_encriptacion);
         if(errores::$error){
-            $error = $this->error->error(mensaje: 'Error al inicializar datos', data: $init);
+            $error = $this->error->error(mensaje: 'Error al generar base', data: $base);
             print_r($error);
             die('Error');
         }
+
+    }
+
+    /**
+     * Asigna los valores necesarios para la ejecucion de la clase
+     * @version 1.2.0
+     * @param stdClass $init obj->clave obj->metodo_encriptacion obj->iv
+     * @return array|stdClass
+     */
+    private function asigna_valores_base(stdClass $init): array|stdClass
+    {
+        $keys = array('clave','metodo_encriptacion','iv');
+        $valida = (new validacion())->valida_existencia_keys(keys: $keys,registro:  $init,valida_vacio: false);
+        if(errores::$error){
+            return $this->error->error(mensaje: 'Error al validar init', data: $valida);
+        }
+
         if($init->clave !==''){
             $this->aplica_encriptacion = true;
         }
@@ -37,6 +55,11 @@ class encriptador{
         $this->metodo_encriptacion = $init->metodo_encriptacion;
         $this->iv = $init->iv;
 
+        $vacio_encriptado = $this->vacio_encriptado();
+        if(errores::$error){
+            return $this->error->error(mensaje: 'Error al generar vacio encriptado', data: $vacio_encriptado);
+        }
+        return $init;
     }
 
     /**
@@ -60,6 +83,13 @@ class encriptador{
             catch (Throwable $e){
                 return $this->error->error(mensaje: 'Error al desencriptar',data:  $e);
             }
+
+            if(((string)$desencriptado === '') && $valor !== $this->vacio_encriptado) {
+                var_dump($valor);
+                var_dump($this->vacio_encriptado);
+                return $this->error->error(mensaje: 'Error al desencriptar', data: $valor);
+            }
+
         }
         return $desencriptado;
     }
@@ -87,6 +117,28 @@ class encriptador{
     }
 
     /**
+     * Inicializa los atributos de la clase
+     * @version 1.2.0
+     * @param string $clave Clave de encriptacion
+     * @param string $iv Clave de encriptacion
+     * @param string $metodo_encriptacion Metodo AES
+     * @return array|stdClass
+     */
+    private function inicializa_datos(string $clave, string $iv, string $metodo_encriptacion): array|stdClass
+    {
+        $init = $this->inicializa_valores(clave: $clave,iv: $iv,metodo_encriptacion: $metodo_encriptacion);
+        if(errores::$error){
+            return $this->error->error(mensaje: 'Error al inicializar datos', data: $init);
+        }
+
+        $base = $this->asigna_valores_base(init: $init);
+        if(errores::$error){
+            return $this->error->error(mensaje: 'Error al generar base', data: $base);
+        }
+        return $base;
+    }
+
+    /**
      * Inicializa los valores para encriptacion necesarios
      * @version 1.1.0
      * @param string $clave Clave de encriptacion
@@ -94,7 +146,7 @@ class encriptador{
      * @param string $iv Palabra para encriptacion
      * @return stdClass|array obj->clave obj->metodo_encriptacion, obj->iv
      */
-    private function inicializa_valores(string $clave, string $metodo_encriptacion, string $iv): stdClass|array
+    private function inicializa_valores(string $clave, string $iv, string $metodo_encriptacion): stdClass|array
     {
         $conf_generales = new generales();
 
@@ -115,12 +167,29 @@ class encriptador{
             $iv = $conf_generales->iv_encripta;
         }
 
+
+
         $data = new stdClass();
         $data->clave = $clave;
         $data->metodo_encriptacion = $metodo_encriptacion;
         $data->iv = $iv;
 
         return $data;
+    }
+
+    /**
+     * Genera el encriptado en vacio para validar que sea correcto el desencriptado
+     * @version 1.2.0
+     * @return array|string Valor encriptado en vacio
+     */
+    private function vacio_encriptado(): array|string
+    {
+        $vacio_encriptado = $this->encripta(valor:'');
+        if(errores::$error){
+            return $this->error->error(mensaje: 'Error al generar vacio encriptado', data: $vacio_encriptado);
+        }
+        $this->vacio_encriptado = $vacio_encriptado;
+        return $vacio_encriptado;
     }
 
     /**
