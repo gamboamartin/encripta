@@ -64,7 +64,7 @@ class encriptador{
 
     /**
      * Desencripta un valor entregado
-     * @version 1.0.0
+     * @version 1.2.1
      * @param string $valor Valor a desencriptar
      * @return string|array
      */
@@ -85,8 +85,6 @@ class encriptador{
             }
 
             if(((string)$desencriptado === '') && $valor !== $this->vacio_encriptado) {
-                var_dump($valor);
-                var_dump($this->vacio_encriptado);
                 return $this->error->error(mensaje: 'Error al desencriptar', data: $valor);
             }
 
