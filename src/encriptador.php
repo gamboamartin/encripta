@@ -1,15 +1,16 @@
 <?php
 /**
  * @author Martin Gamboa Vazquez
- * @version 1.0.0
+ * @version 1.1.0
  * Encripta y desencripta valores entregados
  */
 namespace gamboamartin\encripta;
 
 
-
 use config\generales;
 use gamboamartin\errores\errores;
+use gamboamartin\validacion\validacion;
+use stdClass;
 use Throwable;
 
 class encriptador{
@@ -21,23 +22,20 @@ class encriptador{
 
     public function __construct(string $clave = '', string $iv = '', string $metodo_encriptacion = ''){
         $this->error = new errores();
-        if($clave === '') {
-            $clave = (new generales())->clave;
-        }
-        if($metodo_encriptacion === '') {
-            $metodo_encriptacion = (new generales())->metodo_encriptacion;
-        }
-        if($iv === '') {
-            $iv = (new generales())->iv_encripta;
-        }
 
-        if($clave !==''){
+        $init = $this->inicializa_valores(clave: $clave,metodo_encriptacion: $metodo_encriptacion,iv: $iv);
+        if(errores::$error){
+            $error = $this->error->error(mensaje: 'Error al inicializar datos', data: $init);
+            print_r($error);
+            die('Error');
+        }
+        if($init->clave !==''){
             $this->aplica_encriptacion = true;
         }
 
-        $this->clave = $clave;
-        $this->metodo_encriptacion = $metodo_encriptacion;
-        $this->iv = $iv;
+        $this->clave = $init->clave;
+        $this->metodo_encriptacion = $init->metodo_encriptacion;
+        $this->iv = $init->iv;
 
     }
 
@@ -86,6 +84,43 @@ class encriptador{
         }
         return $encriptado;
 
+    }
+
+    /**
+     * Inicializa los valores para encriptacion necesarios
+     * @version 1.1.0
+     * @param string $clave Clave de encriptacion
+     * @param string $metodo_encriptacion Metodo AES etc
+     * @param string $iv Palabra para encriptacion
+     * @return stdClass|array obj->clave obj->metodo_encriptacion, obj->iv
+     */
+    private function inicializa_valores(string $clave, string $metodo_encriptacion, string $iv): stdClass|array
+    {
+        $conf_generales = new generales();
+
+        $keys = array('clave','metodo_encriptacion','iv_encripta');
+        $valida = (new validacion())->valida_existencia_keys(keys: $keys, registro: $conf_generales,
+            valida_vacio: false);
+        if(errores::$error){
+            return $this->error->error(mensaje: 'Error al validar datos de configuracion generales', data: $valida);
+        }
+
+        if($clave === '') {
+            $clave = $conf_generales->clave;
+        }
+        if($metodo_encriptacion === '') {
+            $metodo_encriptacion = $conf_generales->metodo_encriptacion;
+        }
+        if($iv === '') {
+            $iv = $conf_generales->iv_encripta;
+        }
+
+        $data = new stdClass();
+        $data->clave = $clave;
+        $data->metodo_encriptacion = $metodo_encriptacion;
+        $data->iv = $iv;
+
+        return $data;
     }
 
     /**

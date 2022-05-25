@@ -57,6 +57,36 @@ class encriptadorTest extends test {
 
     }
 
+    public function test_inicializa_valores(): void
+    {
+
+        errores::$error = false;
+        $en = new encriptador();
+        $en = new liberator($en);
+        $clave = '';
+        $metodo_encriptacion = '';
+        $iv = '';
+        $resultado = $en->inicializa_valores($clave, $metodo_encriptacion, $iv);
+        $this->assertNotTrue(errores::$error);
+        $this->assertIsObject( $resultado);
+        $this->assertEquals( 'esta es la clave propuesta',$resultado->clave);
+        $this->assertEquals( 'aes-256-cbc',$resultado->metodo_encriptacion);
+        $this->assertEquals( 'WtYTL1/M8jfstw==',$resultado->iv);
+
+        errores::$error = false;
+        $clave = 'a';
+        $metodo_encriptacion = '';
+        $iv = '';
+        $resultado = $en->inicializa_valores($clave, $metodo_encriptacion, $iv);
+        $this->assertNotTrue(errores::$error);
+        $this->assertIsObject( $resultado);
+        $this->assertEquals( 'a',$resultado->clave);
+        $this->assertEquals( 'aes-256-cbc',$resultado->metodo_encriptacion);
+        $this->assertEquals( 'WtYTL1/M8jfstw==',$resultado->iv);
+
+        errores::$error = false;
+    }
+
     public function test_verifica_datos(): void
     {
 
@@ -80,8 +110,6 @@ class encriptadorTest extends test {
     }
 
 
-    /**
-     */
     public function test_encripta(): void
     {
 

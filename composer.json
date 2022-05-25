@@ -20,7 +20,9 @@
     },
     "require": {
       "gamboa.martin/errores": "^1.0.0",
-      "gamboa.martin/test": "dev-main"
+      "gamboa.martin/test": "dev-main",
+      "gamboa.martin/validacion": "dev-main",
+      "ext-openssl": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
