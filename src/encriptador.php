@@ -115,6 +115,16 @@ class encriptador{
     }
 
     /**
+     * Encripta valor conforme al metodo de encriptacion md5
+     * @version 1.3.1
+     * @param string $valor Valor a encriptar
+     * @return string
+     */
+    public function encripta_md5(string $valor){
+        return md5($valor);
+    }
+
+    /**
      * Inicializa los atributos de la clase
      * @version 1.2.0
      * @param string $clave Clave de encriptacion

@@ -107,6 +107,28 @@ class encriptadorTest extends test {
 
     }
 
+    public function test_encripta_md5(): void
+    {
+        errores::$error = false;
+
+        $en = new encriptador();
+        $valor = '';
+        $resultado = $en->encripta_md5($valor);
+        $this->assertNotTrue(errores::$error);
+        $this->assertIsString($resultado);
+        $this->assertEquals('d41d8cd98f00b204e9800998ecf8427e', $resultado);
+
+        errores::$error = false;
+
+        $valor = 'prueba';
+        $resultado = $en->encripta_md5($valor);
+        $this->assertNotTrue(errores::$error);
+        $this->assertIsString($resultado);
+        $this->assertEquals('c893bad68927b457dbed39460e6afd62', $resultado);
+
+        errores::$error = false;
+    }
+
     public function test_inicializa_datos(): void
     {
         errores::$error = false;
