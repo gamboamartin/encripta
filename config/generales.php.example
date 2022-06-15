@@ -1,0 +1,7 @@
+<?php
+namespace config;
+class generales{
+    public string $clave = 'esta es la clave propuesta';
+    public string $metodo_encriptacion = 'aes-256-cbc';
+    public string $iv_encripta = 'WtYTL1/M8jfstw==';
+}
