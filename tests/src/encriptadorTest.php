@@ -101,7 +101,7 @@ class encriptadorTest extends test {
         $valor = 'prueba';
         $resultado = $en->encripta($valor);
         $this->assertNotTrue(errores::$error);
-        $this->assertEquals('afnn4IH/j6/t9Kiz0OkOBw==', $resultado);
+        $this->assertEquals('WrnhAI/ra34HC1co+Ziohg==', $resultado);
 
         errores::$error = false;
 
@@ -139,7 +139,7 @@ class encriptadorTest extends test {
         $metodo_encriptacion = '';
         $resultado = $en->inicializa_datos($clave, $iv, $metodo_encriptacion);
         $this->assertNotTrue(errores::$error);
-        $this->assertEquals('WtYTL1/M8jfstw==', $resultado->iv);
+        $this->assertEquals('WtYTL1/M8jdszw==', $resultado->iv);
         $this->assertEquals('aes-256-cbc', $resultado->metodo_encriptacion);
 
         errores::$error = false;
@@ -149,7 +149,7 @@ class encriptadorTest extends test {
         $metodo_encriptacion = '';
         $resultado = $en->inicializa_datos($clave, $iv, $metodo_encriptacion);
         $this->assertNotTrue(errores::$error);
-        $this->assertEquals('WtYTL1/M8jfstw==', $resultado->iv);
+        $this->assertEquals('WtYTL1/M8jdszw==', $resultado->iv);
         $this->assertEquals('aes-256-cbc', $resultado->metodo_encriptacion);
         $this->assertEquals('zzz', $resultado->clave);
         errores::$error = false;
@@ -167,9 +167,9 @@ class encriptadorTest extends test {
         $resultado = $en->inicializa_valores($clave, $metodo_encriptacion, $iv);
         $this->assertNotTrue(errores::$error);
         $this->assertIsObject( $resultado);
-        $this->assertEquals( 'esta es la clave propuesta',$resultado->clave);
+        $this->assertEquals( 'administrador',$resultado->clave);
         $this->assertEquals( 'aes-256-cbc',$resultado->metodo_encriptacion);
-        $this->assertEquals( 'WtYTL1/M8jfstw==',$resultado->iv);
+        $this->assertEquals( 'WtYTL1/M8jdszw==',$resultado->iv);
 
         errores::$error = false;
         $clave = 'a';
@@ -180,7 +180,7 @@ class encriptadorTest extends test {
         $this->assertIsObject( $resultado);
         $this->assertEquals( 'a',$resultado->clave);
         $this->assertEquals( 'aes-256-cbc',$resultado->metodo_encriptacion);
-        $this->assertEquals( 'WtYTL1/M8jfstw==',$resultado->iv);
+        $this->assertEquals( 'WtYTL1/M8jdszw==',$resultado->iv);
 
         errores::$error = false;
     }
@@ -215,7 +215,7 @@ class encriptadorTest extends test {
         $encriptado = $en->vacio_encriptado();
         $this->assertNotTrue(errores::$error);
         $this->assertIsString( $encriptado);
-        $this->assertEquals('gcEvKISRAHzCsYVrd0oELA==', $encriptado);
+        $this->assertEquals('PHDA/NloYgF1lc+UHzxaUw==', $encriptado);
         errores::$error = false;
     }
 
