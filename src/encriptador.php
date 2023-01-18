@@ -68,7 +68,7 @@ class encriptador{
      * @param string $valor Valor a desencriptar
      * @return string|array
      */
-    public function desencripta(string $valor): string|array
+    final public function desencripta(string $valor): string|array
     {
         $desencriptado = $valor;
         if($this->aplica_encriptacion) {
