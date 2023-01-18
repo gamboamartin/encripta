@@ -19,9 +19,9 @@
         }
     },
     "require": {
-      "gamboa.martin/errores": "^1.0.0",
-      "gamboa.martin/test": "^1.0.0",
-      "gamboa.martin/validacion": "^1.0.0",
+      "gamboa.martin/errores": "^2.0.0",
+      "gamboa.martin/test": "^2.0.0",
+      "gamboa.martin/validacion": "^2.0.0",
       "ext-openssl": "*"
     },
     "require-dev": {
