@@ -98,7 +98,7 @@ class encriptador{
      * @param string $valor Valor a encriptar
      * @return string|array
      */
-    public function encripta(string $valor): string|array
+    final public function encripta(string $valor): string|array
     {
         $encriptado = $valor;
         if($this->aplica_encriptacion){
@@ -120,7 +120,8 @@ class encriptador{
      * @param string $valor Valor a encriptar
      * @return string
      */
-    public function encripta_md5(string $valor){
+    final public function encripta_md5(string $valor): string
+    {
         return md5($valor);
     }
 
