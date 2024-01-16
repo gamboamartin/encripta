@@ -62,9 +62,17 @@ class encriptador{
     }
 
     /**
-     * Desencripta un valor entregado
-     * @param string $valor Valor a desencriptar
-     * @return string|array
+     * POR DOCUMENTAR WIKI
+     * Desencripta el valor proporcionado.
+     *
+     * La función desencripta recibe un string, realiza la verificación de datos y si no hay ningún error procede a
+     * desencriptar el valor.
+     * Si se presenta un error durante la verificación de datos o la desencriptación, se devuelve un error.
+     * Si el valor desencriptado es una cadena vacía y el valor proporcionado no está vacío, entonces también se
+     * devuelve un error.
+     * @param string $valor El valor a desencriptar.
+     * @return string|array El valor desencriptado o un array de error, si algo falla.
+     * @version 4.3.0
      */
     final public function desencripta(string $valor): string|array
     {
