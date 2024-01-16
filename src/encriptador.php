@@ -99,9 +99,16 @@ class encriptador{
     }
 
     /**
+     * POR DOCUMENTAR EN WIKI
      * Encripta un valor conforme al metodo cargado en generales
+     *
+     * Esta función toma un valor de entrada, verifica los datos y si no hay ningún error, encripta el valor.
+     * Si se presenta un error durante la verificación de datos o la encriptación, se devuelve un error.
+     *
      * @param string $valor Valor a encriptar
-     * @return string|array
+     *
+     * @return string|array Retorna el valor encriptado o un arreglo de error si algo falla
+     * @version 4.4.0
      */
     final public function encripta(string $valor): string|array
     {
