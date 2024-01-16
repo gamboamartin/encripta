@@ -207,8 +207,17 @@ class encriptador{
     }
 
     /**
-     * Genera el encriptado en vacio para validar que sea correcto el desencriptado
-     * @return array|string Valor encriptado en vacio
+     * POR DOCUMENTAR EN WIKI
+     * Genera una representación encriptada de una cadena vacía
+     *
+     * Esta función encripta una cadena vacía y devuelve el resultado. Se usa principalmente
+     * para comparaciones en otras operaciones de encriptación de este sistema. Si la encriptación
+     * no está habilitada en la configuración del sistema, simplemente devuelve una cadena vacía.
+     *
+     * @return string|array  Representación encriptada de una cadena vacía o un mensaje de error si la
+     *                 encriptación falla.
+     *
+     * @version 4.5.0
      */
     private function vacio_encriptado(): array|string
     {
