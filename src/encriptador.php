@@ -35,7 +35,6 @@ class encriptador{
 
     /**
      * Asigna los valores necesarios para la ejecucion de la clase
-     * @version 1.2.0
      * @param stdClass $init obj->clave obj->metodo_encriptacion obj->iv
      * @return array|stdClass
      */
@@ -93,7 +92,6 @@ class encriptador{
 
     /**
      * Encripta un valor conforme al metodo cargado en generales
-     * @version 1.0.0
      * @param string $valor Valor a encriptar
      * @return string|array
      */
@@ -126,7 +124,6 @@ class encriptador{
 
     /**
      * Inicializa los atributos de la clase
-     * @version 1.2.0
      * @param string $clave Clave de encriptacion
      * @param string $iv Clave de encriptacion
      * @param string $metodo_encriptacion Metodo AES
@@ -147,12 +144,21 @@ class encriptador{
     }
 
     /**
-     * Inicializa los valores para encriptacion necesarios
-     * @version 1.1.0
-     * @param string $clave Clave de encriptacion
-     * @param string $metodo_encriptacion Metodo AES etc
-     * @param string $iv Palabra para encriptacion
-     * @return stdClass|array obj->clave obj->metodo_encriptacion, obj->iv
+     * POR DOCUMENTAR EN WIKI
+     * Esta función inicia los valores relacionados con la encriptación.
+     * Se toma como referencia la configuración general para determinar los valores iniciales de la clave,
+     * el vector de inicialización (iv), y el método de encriptación. Si estos valores vienen en los parámetros de
+     * la función, se utilizan esos valores. Si no, se toman los valores por defecto de la configuración general.
+     * Esta función regresa un objeto con los valores de clave, vector de inicialización y método de encriptación.
+     *
+     * @param string $clave - Clave de encriptación
+     * @param string $iv - Vector de inicialización para la encriptación
+     * @param string $metodo_encriptacion - Método de encriptación a utilizar
+     *
+     * @return stdClass|array - Objeto con los datos de la encriptación o arreglo con el error si existió alguno
+     * durante la operación
+     *
+     * @version 4.2.0
      */
     private function inicializa_valores(string $clave, string $iv, string $metodo_encriptacion): stdClass|array
     {
@@ -187,7 +193,6 @@ class encriptador{
 
     /**
      * Genera el encriptado en vacio para validar que sea correcto el desencriptado
-     * @version 1.2.0
      * @return array|string Valor encriptado en vacio
      */
     private function vacio_encriptado(): array|string
