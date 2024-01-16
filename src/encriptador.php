@@ -64,7 +64,6 @@ class encriptador{
 
     /**
      * Desencripta un valor entregado
-     * @version 1.2.1
      * @param string $valor Valor a desencriptar
      * @return string|array
      */
@@ -202,11 +201,16 @@ class encriptador{
     }
 
     /**
-     * Verifica que los parametros necesarios para encriptar y desencriptar sean validos
-     * @version 1.0.0
-     * @return bool|array
+     * POR DOCUMENTAR EN WIKI
+     * Verifica si los datos son válidos para la encriptación.
+     * Comprueba si el método de encriptación, la clave y el IV (vector de inicialización)
+     * no están vacíos. En caso afirmativo, devuelve un error, en caso contrario, devuelve true.
+     *
+     * @return true|array Retorna true si todos los datos son válidos.
+     * Retorna un array con mensaje de error en caso contrario.
+     * @version 4.1.0
      */
-    private function verifica_datos(): bool|array
+    private function verifica_datos(): true|array
     {
         if($this->metodo_encriptacion === ''){
             return $this->error->error(mensaje: 'Error el metodo de encriptacion esta vacio',
