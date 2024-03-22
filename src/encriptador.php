@@ -62,7 +62,7 @@ class encriptador{
     }
 
     /**
-     * POR DOCUMENTAR WIKI
+     * POR DOCUMENTAR WIKI FINAL REV
      * Desencripta el valor proporcionado.
      *
      * La función desencripta recibe un string, realiza la verificación de datos y si no hay ningún error procede a
@@ -87,11 +87,11 @@ class encriptador{
                     $this->iv);
             }
             catch (Throwable $e){
-                return $this->error->error(mensaje: 'Error al desencriptar',data:  $e);
+                return $this->error->error(mensaje: 'Error al desencriptar',data:  $e, es_final: true);
             }
 
             if(((string)$desencriptado === '') && $valor !== $this->vacio_encriptado) {
-                return $this->error->error(mensaje: 'Error al desencriptar', data: $valor);
+                return $this->error->error(mensaje: 'Error al desencriptar', data: $valor, es_final: true);
             }
 
         }
@@ -230,7 +230,7 @@ class encriptador{
     }
 
     /**
-     * POR DOCUMENTAR EN WIKI
+     * POR DOCUMENTAR EN WIKI FINAL REV
      * Verifica si los datos son válidos para la encriptación.
      * Comprueba si el método de encriptación, la clave y el IV (vector de inicialización)
      * no están vacíos. En caso afirmativo, devuelve un error, en caso contrario, devuelve true.
@@ -243,13 +243,15 @@ class encriptador{
     {
         if($this->metodo_encriptacion === ''){
             return $this->error->error(mensaje: 'Error el metodo de encriptacion esta vacio',
-                data: $this->metodo_encriptacion);
+                data: $this->metodo_encriptacion, es_final: true);
         }
         if($this->clave === ''){
-            return $this->error->error(mensaje: 'Error el clave de encriptacion esta vacio', data: $this->clave);
+            return $this->error->error(mensaje: 'Error el clave de encriptacion esta vacio', data: $this->clave
+                , es_final: true);
         }
         if($this->iv === ''){
-            return $this->error->error(mensaje: 'Error el iv de encriptacion esta vacio', data: $this->iv);
+            return $this->error->error(mensaje: 'Error el iv de encriptacion esta vacio', data: $this->iv,
+                es_final: true);
         }
         return true;
     }
