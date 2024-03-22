@@ -34,9 +34,28 @@ class encriptador{
     }
 
     /**
-     * Asigna los valores necesarios para la ejecucion de la clase
-     * @param stdClass $init obj->clave obj->metodo_encriptacion obj->iv
-     * @return array|stdClass
+     * POR DOCUMENTAR EN WIKI FINAL REV
+     * Asigna los valores base necesarios para la encriptación.
+     *
+     * Esta función es parte de la clase Encriptador y se usa para configurar los valores base
+     * necesarios para la encriptación y desencriptación. Los valores base incluyen la 'clave'
+     * que se usará para encriptar/desencriptar los datos, el 'metodo_encriptacion'
+     * que determina qué algoritmo de encriptación se debe utilizar y el 'iv' que es el
+     * vector de inicialización requerido por algunos modos de operación de cifrado.
+     *
+     * También genera un valor para 'vacio_encriptado' que se usa para manejar los valores vacíos
+     * durante el proceso de encriptación/desencriptación.
+     *
+     * Si se proporciona una 'clave' no vacía, 'aplica_encriptacion' se establece en true
+     * lo que significa que la encriptación se aplicará en los datos.
+     *
+     * @param stdClass $init Un objeto con las claves 'clave', 'metodo_encriptacion' e 'iv'
+     * @return array|stdClass Retorna el mismo objeto $init en caso de éxito, o un objeto de error
+     *                        si se encuentra una anomalía durante la validación o la generación
+     *                        del valor 'vacio_encriptado'.
+     *
+     * @throws errores si los parámetros proporcionados no son válidos o si el valor
+     *                   'vacio_encriptado' no se puede generar.
      */
     private function asigna_valores_base(stdClass $init): array|stdClass
     {
@@ -99,7 +118,7 @@ class encriptador{
     }
 
     /**
-     * POR DOCUMENTAR EN WIKI
+     * POR DOCUMENTAR EN WIKI FINAL REV
      * Encripta un valor conforme al metodo cargado en generales
      *
      * Esta función toma un valor de entrada, verifica los datos y si no hay ningún error, encripta el valor.
@@ -159,7 +178,7 @@ class encriptador{
     }
 
     /**
-     * POR DOCUMENTAR EN WIKI
+     * POR DOCUMENTAR EN WIKI FINAL REV
      * Esta función inicia los valores relacionados con la encriptación.
      * Se toma como referencia la configuración general para determinar los valores iniciales de la clave,
      * el vector de inicialización (iv), y el método de encriptación. Si estos valores vienen en los parámetros de
@@ -207,7 +226,7 @@ class encriptador{
     }
 
     /**
-     * POR DOCUMENTAR EN WIKI
+     * POR DOCUMENTAR EN WIKI FINAL REV
      * Genera una representación encriptada de una cadena vacía
      *
      * Esta función encripta una cadena vacía y devuelve el resultado. Se usa principalmente
