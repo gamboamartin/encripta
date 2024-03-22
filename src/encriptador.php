@@ -51,11 +51,11 @@ class encriptador{
      *
      * @param stdClass $init Un objeto con las claves 'clave', 'metodo_encriptacion' e 'iv'
      * @return array|stdClass Retorna el mismo objeto $init en caso de éxito, o un objeto de error
-     *                        si se encuentra una anomalía durante la validación o la generación
+     *                        sí se encuentra una anomalía durante la validación o la generación
      *                        del valor 'vacio_encriptado'.
      *
      * @throws errores si los parámetros proporcionados no son válidos o si el valor
-     *                   'vacio_encriptado' no se puede generar.
+     *                   'Vacio_encriptado' no se puede generar.
      */
     private function asigna_valores_base(stdClass $init): array|stdClass
     {
@@ -147,7 +147,6 @@ class encriptador{
 
     /**
      * Encripta valor conforme al metodo de encriptacion md5
-     * @version 1.3.1
      * @param string $valor Valor a encriptar
      * @return string
      */
