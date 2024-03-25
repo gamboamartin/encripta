@@ -146,9 +146,25 @@ class encriptador{
     }
 
     /**
-     * Encripta valor conforme al metodo de encriptacion md5
-     * @param string $valor Valor a encriptar
-     * @return string
+     * POR DOCUMENTAR EN WIKI FINAL REV
+     * Función encripta_md5
+     *
+     * Esta función se encarga de encriptar una cadena dada utilizando el algoritmo md5.
+     *
+     * @param string $valor La cadena que se desea encriptar.
+     * @return string Retorna la cadena encriptada en formato md5.
+     *
+     * @example
+     * ```
+     * $textoEncriptado = encripta_md5("Hola mundo");
+     * echo $textoEncriptado; // Imprime algo similar a: fc5e038d38a57032085441e7fe7010b0
+     * ```
+     *
+     * @throws errores Si el parámetro de entrada no es una cadena.
+     *
+     * @note Por favor, ten en cuenta que md5 no es un algoritmo de encriptación segura,
+     * y su uso no se recomienda para almacenar contraseñas u otra información sensible.
+     * @version 6.5.0
      */
     final public function encripta_md5(string $valor): string
     {
