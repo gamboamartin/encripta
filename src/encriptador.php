@@ -156,11 +156,17 @@ class encriptador{
     }
 
     /**
-     * Inicializa los atributos de la clase
-     * @param string $clave Clave de encriptacion
-     * @param string $iv Clave de encriptacion
-     * @param string $metodo_encriptacion Metodo AES
-     * @return array|stdClass
+     * POR DOCUMENTAR EN WIKI FINAL REV
+     * Inicializa los datos utilizados para la encriptación.
+     *
+     * @param string $clave El string que se utiliza como clave para la encriptación.
+     * @param string $iv Vector de inicialización para el método de encriptación.
+     * @param string $metodo_encriptacion El método de encriptación a utilizar.
+     *
+     * @return array|stdClass Retorna los valores inicializados si es exitoso,
+     *                        o un objeto de error en caso contrario.
+     *
+     * @version 6.4.0
      */
     private function inicializa_datos(string $clave, string $iv, string $metodo_encriptacion): array|stdClass
     {
