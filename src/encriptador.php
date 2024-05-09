@@ -81,6 +81,7 @@ class encriptador{
     }
 
     /**
+     * TOTAL
      * Desencripta el valor proporcionado.
      *
      * La función desencripta recibe un string, realiza la verificación de datos y si no hay ningún error procede a
@@ -91,7 +92,7 @@ class encriptador{
      * @param string $valor El valor a desencriptar.
      * @return string|array El valor desencriptado o un array de error, si algo falla.
      * @version 4.3.0
-     * @url https://github.com/gamboamartin/encripta/wiki/src-encriptador#desencriptastring-valor-stringarray
+     * @url https://github.com/gamboamartin/encripta/wiki/src.encriptador.desencripta.6.7.0
      */
     final public function desencripta(string $valor): string|array
     {
@@ -270,6 +271,7 @@ class encriptador{
     }
 
     /**
+     *  TOTAL
      * Verifica si los datos son válidos para la encriptación.
      * Comprueba si el método de encriptación, la clave y el IV (vector de inicialización)
      * no están vacíos. En caso afirmativo, devuelve un error, en caso contrario, devuelve true.
@@ -277,7 +279,7 @@ class encriptador{
      * @return true|array Retorna true si todos los datos son válidos.
      * Retorna un array con mensaje de error en caso contrario.
      * @version 4.1.0
-     * @url https://github.com/gamboamartin/encripta/wiki/src-encriptador#verifica_datos
+     * @url https://github.com/gamboamartin/encripta/wiki/src.encriptador.verifica_datos.6.7.0
      */
     private function verifica_datos(): true|array
     {
